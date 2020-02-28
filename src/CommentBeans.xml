@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <context:annotation-config/>
+     
+    <bean id="qualifier" class="com.rin.comment.QualifierTest"></bean>
+    
+    <bean id="student1" class="com.rin.comment.Student">
+    	<property name="name" value="宫森葵"/>
+    	<property name="age" value="27"/>
+    </bean>
+    
+    <bean id="student2" class="com.rin.comment.Student" p:name="安原绘麻" p:age="27"/>
+    
+    <bean id="startEvent" class="com.rin.comment.StartEventHandler"></bean>
+    <bean id="stopEvent" class="com.rin.comment.StopEventHandler"></bean>
+    <bean id="closeEvent" class="com.rin.comment.CloseEventHandler"></bean>
+    
+    <bean id="customEvent" class="com.rin.comment.CustomEventHandler"></bean>
+    <bean id="customEventPublisher" class="com.rin.comment.CustomEventPublisher"></bean>
+	
+</beans>

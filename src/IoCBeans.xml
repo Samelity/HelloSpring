@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="parent" abstract="true">
+		<property name="message" value="这是抽象父类！" />
+	</bean>
+
+	<bean id="beansFactory" class="com.rin.ioc.HelloWorld">
+		<property name="message" value="Spring Framework BeansFactory Sample!" />
+	</bean>
+
+	<bean id="applicationContext" class="com.rin.ioc.HelloWorld">
+		<property name="message" value="Spring Framework ApplicationContext Sample!" />
+	</bean>
+
+	<bean id="singleton" class="com.rin.ioc.HelloWorld" scope="singleton">
+		<property name="message" value="it's singleton default message!" />
+	</bean>
+	
+	<bean id="prototype" class="com.rin.ioc.HelloWorld" scope="prototype">
+		<property name="message" value="it's prototype default message!" />
+	</bean>
+	
+	<bean id="exampleBean" class="com.rin.ioc.ExampleBean" init-method="initMethod" destroy-method="destroyMethod">
+		<property name="message" value= "it's exampleBean!" />
+	</bean>
+	
+	<bean id="usagi" class="com.rin.ioc.HelloUsagi" parent="parent">
+		<property name="usagi" value="私はウサギ！" />
+	</bean>
+	
+	<bean class ="com.rin.ioc.InitBean" />
+
+</beans>

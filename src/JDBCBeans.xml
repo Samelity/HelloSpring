@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+   	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    	p:driverClassName="com.mysql.jdbc.Driver"
+    	p:url="jdbc:mysql://localhost:3306/Spring"
+    	p:username="root"
+    	p:password="deviskaifa">
+    </bean>
+    
+    <bean id="sTemp" class="com.rin.jdbc.StudentJDBCTemplate"
+    	p:dataSource-ref="dataSource">
+    </bean>
+    
+    <!-- 事务处理器设置  -->
+    <tx:advice transaction-manager="transactionManager" id="advice">
+    	<tx:attributes>
+    		<tx:method name="create"/>
+    	</tx:attributes>
+    </tx:advice>
+    
+    <!-- 切面设置 -->
+    <aop:config proxy-target-class="true">
+    	<aop:pointcut expression="execution(* com.rin.jdbc.StudentJDBCTemplate.create(..))" id="createTrans"/>
+    	<aop:advisor advice-ref="advice" pointcut-ref="createTrans"/>
+    </aop:config>
+    
+    <bean id="transactionManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+    	p:dataSource-ref="dataSource">
+    </bean>
+    
+</beans>
